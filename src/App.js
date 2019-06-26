@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Dropdown from './components/Dropdown';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+   constructor(props) {
+      super(props)
+      this.state = {
+         favoriteCity: 'Select City'
+      }
+   }
+
+   onSelectCity = (favoriteCity) => this.setState({ favoriteCity })
+
+
+   render() {
+      const { favoriteCity } = this.state
+      return (
+         <div>
+            <h1>React Custom Dropdown</h1>
+            <Dropdown
+               favoriteCity={favoriteCity}
+               onSelectCity={this.onSelectCity}
+            />
+            {favoriteCity !== 'Select City' && <h4>My favorite city is {this.state.favoriteCity}.</h4>}
+         </div>
+      );
+   }
 }
 
 export default App;
